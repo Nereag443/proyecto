@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react'
 import { ThemeContext } from './themeContext'
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('darkMode') === 'true'
+  })
 
   const toggleTheme = () => {
     setDarkMode(prev => !prev)
   }
 
   useEffect(() => {
-    console.log('Dark mode is now:', darkMode)
+    localStorage.setItem('darkMode', darkMode.toString())
     document.documentElement.classList.toggle('dark', darkMode)
-    console.log('Document class list:', document.documentElement.classList)
   }, [darkMode])
 
   return (
