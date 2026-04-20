@@ -8,7 +8,7 @@ interface SelectProps {
 
 export function Select(props: SelectProps) {
     return (
-        <div className="flex flex-col w-full rounded-lg border border-gray-300 p-2 focus:outline-none">
+        <div className="flex flex-col w-full rounded border border-gray-300 p-2 focus:outline-none">
         <select 
             value={props.value} 
             onChange={(e) => props.onChange(e.target.value)} 
