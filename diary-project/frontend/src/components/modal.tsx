@@ -11,12 +11,16 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center z-50">
-            <div className="bg-white text-black dark:bg-gray-900 dark:text-white p-4 rounded shadow-md">
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center"
+        onClick={onClose}>
+        <div className="bg-white text-black dark:bg-gray-900 dark:text-white p-4 rounded shadow-md flex flex-col items-center gap-4"
+        onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between w-full">
                 <h2 className="text-lg font-bold mb-2">{title}</h2>
-                <Button text="Cerrar" onClick={onClose} />
-                {children}
+                <Button text="X" onClick={onClose} />
             </div>
+            {children}
+        </div>
         </div>
     );
 }
