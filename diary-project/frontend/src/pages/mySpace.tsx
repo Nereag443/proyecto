@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Select } from "../components/select";
 import { MediaCard } from "../components/mediaCard";
 import type { MediaCardProps } from "../components/mediaCard";
+import { Rating } from "../components/rating";
 
 export function MySpace () {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,6 +13,7 @@ export function MySpace () {
     const [type, setType] = useState("");
     const [date, setDate] = useState("");
     const [review, setReview] = useState("");
+    const [rating, setRating] = useState(0);
     const [errors, setErrors] = useState({title: "", type: "", date: ""});
     const [media, setMedia] = useState<MediaCardProps[]>([]);
     const handleSave = () => {
@@ -28,7 +30,7 @@ export function MySpace () {
         setErrors(newErrors);
 
         if (Object.values(newErrors).every((error) => error === "")) {
-            setMedia([...media, { title, type, date, review }]);
+            setMedia([...media, { title, type, date, review, rating: Number(rating) }]);
             setIsModalOpen(false);
         }
     }
@@ -42,10 +44,10 @@ export function MySpace () {
                     text="Añadir"
                     onClick={() => setIsModalOpen(true)} />
                 <div className="flex flex-col gap-4 mt-4">
-                            {media.map((item, index) => (
-                                <MediaCard key={index} {...item} />
-                            ))}
-                        </div>
+                    {media.map((item, index) => (
+                        <MediaCard key={index} {...item} />
+                    ))}
+                </div>
                 <Modal 
                     isOpen={isModalOpen} 
                     onClose={() => setIsModalOpen(false)} 
@@ -70,6 +72,9 @@ export function MySpace () {
                             value={review}
                             placeholder="Introduce una reseña"
                             onChange={(value) => setReview(value)} />
+                        <Rating 
+                            rating={Number(rating)} 
+                            onChange={(value) => setRating(value)} />
                         <Button text="Guardar" onClick={handleSave} />
                     </Modal>
             </div>
