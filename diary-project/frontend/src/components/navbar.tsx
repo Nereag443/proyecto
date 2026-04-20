@@ -12,6 +12,7 @@ export function Navbar (props: NavbarProps) {
                 <Link to="/">Inicio</Link>
                 <Link to="/mySpace">Mi espacio</Link>
                 <Link to="/stats">Estadísticas</Link>
+                <Link to="/profile">Perfil</Link>
             </div>
             <Button 
                 onClick={props.onLogout}

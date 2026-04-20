@@ -8,6 +8,7 @@ import './App.css'
 import { Button } from './components/button'
 import { useContext } from 'react';
 import NotFound from './pages/notFound'
+import { Profile } from './pages/profile'
 
 function App() {
   const context = useContext(ThemeContext);
@@ -24,6 +25,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/mySpace" element={<MySpace />} />
       <Route path="/stats" element={<Stats />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
      </Routes>
 
