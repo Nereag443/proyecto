@@ -3,10 +3,12 @@ interface SelectProps {
     value: string,
     onChange: (value: string) => void,
     className?: string,
+    error?: string
 }
 
 export function Select(props: SelectProps) {
     return (
+        <div className="flex flex-col w-full rounded-lg border border-gray-300 p-2 focus:outline-none">
         <select 
             value={props.value} 
             onChange={(e) => props.onChange(e.target.value)} 
@@ -15,5 +17,8 @@ export function Select(props: SelectProps) {
                 <option key={index} value={option}>{option}</option>
             ))}
         </select>
+        {props.error && 
+                <span className="text-red-500">{props.error}</span>}
+        </div>
     )
 }
