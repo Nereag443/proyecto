@@ -4,34 +4,82 @@ import { Modal } from "../components/modal";
 import { useState } from "react";
 import { Select } from "../components/select";
 import { MediaCard } from "../components/mediaCard";
-import type { MediaCardProps } from "../components/mediaCard";
 import { Rating } from "../components/rating";
+import { createMedia, getMedia } from "../api/client";
+import { useEffect } from "react";
+import type { Media } from "../types/media";
 
 export function MySpace () {
+    const [media, setMedia] = useState<Media[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [title, setTitle] = useState("");
     const [type, setType] = useState("");
-    const [date, setDate] = useState("");
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(0);
-    const [errors, setErrors] = useState({title: "", type: "", date: ""});
-    const [media, setMedia] = useState<MediaCardProps[]>([]);
-    const handleSave = () => {
-        const newErrors = { title: "", type: "", date: "" };
+    const [errors, setErrors] = useState({title: "", type: ""});
+    const [loading, setLoading] = useState(false);
+    const handleDelete = async (id?: number) => {
+        const response = await fetch(`http://localhost:3001/api/v1/media/${id}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            console.error("Failed to delete media with id:", id);
+            return;
+        }
+        setMedia(prev => prev.filter(item => item.id !== id));
+    }
+
+
+    const handleEdit = async (updatedMedia: Media) => {
+        const response = await fetch(`http://localhost:3001/api/v1/media/${updatedMedia.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+        },
+            body: JSON.stringify(updatedMedia)
+        });
+        if (!response.ok) {
+            throw new Error('Failed to update media');
+        }
+
+        const savedMedia = await response.json();
+        setMedia(prev => prev.map(item => item.id === savedMedia.id ? savedMedia : item));
+    }
+
+    useEffect(() => {
+        setLoading(true);
+        getMedia()
+            .then(setMedia)
+            .catch((error) => {
+                console.error("Error cargando datos:", error);
+            })
+            .finally(() => setLoading(false));
+    }, []);
+    
+    const handleSave = async () => {
+        const newErrors = { title: "", type: ""};
         if (title.trim() === "") {
             newErrors.title = "El título es obligatorio";
         }
         if (type.trim() === "") {
             newErrors.type = "El tipo es obligatorio";
         }
-        if (date.trim() === "") {
-            newErrors.date = "La fecha es obligatoria";
-        }
         setErrors(newErrors);
 
         if (Object.values(newErrors).every((error) => error === "")) {
-            setMedia([...media, { title, type, date, review, rating: Number(rating) }]);
-            setIsModalOpen(false);
+            try {
+                const newMedia = await createMedia({
+                    title,
+                    type,
+                    rating,
+                    review,
+                    user_id: 1
+                });
+                setMedia(prev => [...prev, newMedia]);
+                setIsModalOpen(false);
+            } catch (error) {
+            console.error("Error al crear medio:", error);
+            }
         }
     }
 
@@ -44,9 +92,14 @@ export function MySpace () {
                     text="Añadir"
                     onClick={() => setIsModalOpen(true)} />
                 <div className="flex flex-col gap-4 mt-4">
-                    {media.map((item, index) => (
-                        <MediaCard key={index} {...item} />
-                    ))}
+                    {loading ? ( <p>Cargando...</p>) : 
+                        (media.map((item) => (
+                            <MediaCard key={item.id} {...item}
+                            onDelete={() => handleDelete(item.id)}
+                            onEdit={handleEdit} />
+                        ))
+
+                    )}
                 </div>
                 <Modal 
                     isOpen={isModalOpen} 
@@ -63,17 +116,12 @@ export function MySpace () {
                             onChange={(value) => setType(value)}
                             error={errors.type} />
                         <Button text="Añadir categoría" onClick={() => {}} />
-                        <Input 
-                            value={date} 
-                            type="date"
-                            onChange={(value) => setDate(value)} 
-                            error={errors.date} />
                         <Input
                             value={review}
                             placeholder="Introduce una reseña"
                             onChange={(value) => setReview(value)} />
                         <Rating 
-                            rating={Number(rating)} 
+                            rating={rating} 
                             onChange={(value) => setRating(value)} />
                         <Button text="Guardar" onClick={handleSave} />
                     </Modal>
