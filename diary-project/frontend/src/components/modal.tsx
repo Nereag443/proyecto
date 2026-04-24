@@ -5,15 +5,16 @@ interface ModalProps {
     onClose: () => void;
     title: string;
     children: React.ReactNode;
+    className?: string;
 };
 
-export function Modal({ isOpen, onClose, title, children }: ModalProps) {
+export function Modal({ isOpen, onClose, title, children, className }: ModalProps) {
     if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center"
         onClick={onClose}>
-        <div className="bg-white text-black dark:bg-gray-900 dark:text-white p-4 rounded shadow-md flex flex-col items-center gap-4 w-full max-w-md"
+        <div className={`bg-white text-black dark:bg-gray-900 dark:text-white p-4 rounded shadow-md flex flex-col items-center gap-4 w-full max-w-md ${className || ''}`}
         onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between w-full">
                 <h2 className="text-lg font-bold mb-2">{title}</h2>
