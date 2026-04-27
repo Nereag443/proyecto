@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./button";
 import { Modal } from "./modal";
 import { Input } from "./input";
@@ -59,34 +59,35 @@ export function MediaCard({ id, title, type, date_added, review, rating, onEdit,
                         setEditReview(review);
                         setEditRating(rating);
                         setIsEditModalOpen(true)}} />
-                    <Modal 
-                        isOpen={isEditModalOpen} 
-                        onClose={() => setIsEditModalOpen(false)} 
-                        title="Editar media" >
-                            <Input 
-                                value={editTitle}
-                                placeholder="Introduce el título del medio"
-                                onChange={(value) => setEditTitle(value)}
-                                error={errors.title} />
-                            <Select
-                                value={editType} 
-                                options={["Libro", "Película", "Serie", "Videojuego", "Música"]}
-                                onChange={(value) => setEditType(value)}
-                                error={errors.type} />
-                            <Button text="Añadir categoría" onClick={() => {}} />
-                            <Input
-                                value={editReview || ""}
-                                placeholder="Introduce una reseña"
-                                onChange={setEditReview} />
-                            <Rating 
-                                rating={editRating} 
-                                onChange={setEditRating} />
-                            <Button text="Guardar" onClick={handleSave} />    
-                    </Modal>                    
 
                 <Button 
                     text="Eliminar"
                     onClick={() => setShowDelete(true)} />
+            </div>
+                <Modal 
+                    isOpen={isEditModalOpen} 
+                    onClose={() => setIsEditModalOpen(false)} 
+                    title="Editar media" >
+                        <Input 
+                            value={editTitle}
+                            placeholder="Introduce el título del medio"
+                            onChange={(value) => setEditTitle(value)}
+                            error={errors.title} />
+                        <Select
+                            value={editType} 
+                            options={["Libro", "Película", "Serie", "Videojuego", "Música"]}
+                            onChange={(value) => setEditType(value)}
+                            error={errors.type} />
+                        <Button text="Añadir categoría" onClick={() => {}} />
+                        <Input
+                            value={editReview || ""}
+                            placeholder="Introduce una reseña"
+                            onChange={setEditReview} />
+                        <Rating 
+                            rating={editRating} 
+                            onChange={setEditRating} />
+                        <Button text="Guardar" onClick={handleSave} />    
+                </Modal>                    
                 <Modal 
                     isOpen={showDelete}
                     className="bg-white text-black dark:bg-gray-900 dark:text-white rounded shadow-md p-4 w-full max-w-sm flex flex-col gap-4"
@@ -104,7 +105,6 @@ export function MediaCard({ id, title, type, date_added, review, rating, onEdit,
                             onClick={() => { onDelete?.(); setShowDelete(false) }} />
                         </div>
                 </Modal>
-            </div>
         </div>
     );
 

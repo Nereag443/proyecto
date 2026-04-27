@@ -41,6 +41,29 @@ export const createMedia = (media: Omit<Media, 'id' | 'date_added'>): Promise<Me
     });
 };
 
+export const updateMedia = (id: number, media: Partial<Media>): Promise<Media> => {
+    return new Promise((resolve, reject) => {
+        db.run(
+            `UPDATE media SET title = ?, type = ?, rating = ?, review = ? WHERE id = ?`,
+            [media.title, media.type, media.rating, media.review, id],
+            function (err) {
+                if (err) {
+                    reject(err);
+                } else if (this.changes === 0) {
+                    reject(new Error('Media not found'));
+                } else {
+                    db.get('SELECT * FROM media WHERE id = ?', [id], (err, row: Media) => {
+                    if (err) {
+                        reject(err);
+                    }else {
+                    resolve(row);
+                    }
+                    });
+                }
+            });
+    });
+}
+
 export const deleteMedia = (id: number): Promise<void> => {
     return new Promise((resolve, reject ) => {
         db.run('DELETE FROM media WHERE id = ?', [id], function (err) {

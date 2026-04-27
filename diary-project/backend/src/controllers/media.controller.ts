@@ -26,6 +26,17 @@ export const  createMedia = async(req: Request, res: Response, next: NextFunctio
     }
 };
 
+export const updateMedia = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const id = Number(req.params.id);
+        const { title, type, rating, review } = req.body;
+        const media = await mediaService.updateMedia(id, { title, type, rating, review });
+        res.json(media);
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const deleteMedia = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = Number(req.params.id);
