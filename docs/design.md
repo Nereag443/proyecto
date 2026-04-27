@@ -2,7 +2,7 @@
 
 ### Diseño de wireframe
 
- · https://excalidraw.com/#json=yQLVL0Cx32IGr9RII-B-6,rVoG0SFn34JSFIvIoeefFQ
+ - https://excalidraw.com/#json=yQLVL0Cx32IGr9RII-B-6,rVoG0SFn34JSFIvIoeefFQ
 
 ### Componentes principales
 
