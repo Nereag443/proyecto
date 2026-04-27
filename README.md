@@ -33,5 +33,5 @@ Proyecto de una app
 
 ## Documentación
 
-[Frontend](../backend/)
-[Backend](../backend/) 
+ - [Frontend](./diary-project/frontend/README.md)
+ - [Backend](./diary-project/backend/README.md) 
