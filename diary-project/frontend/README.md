@@ -3,6 +3,7 @@ Aplicación cliente del proyecto desarrollada en React. Permite gestionar usuari
 
 ## Arquitectura
 
+```bash
 /frontend
 │ 
 ├──src
@@ -50,7 +51,7 @@ Aplicación cliente del proyecto desarrollada en React. Permite gestionar usuari
 ├── tsconfig.json
 ├── tsconfig.node.json
 └── vite.config.ts
-
+```
 
 ## Instalación
 

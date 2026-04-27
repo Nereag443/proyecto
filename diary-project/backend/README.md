@@ -8,6 +8,7 @@ La estructura del proyecto sigue una organización modular para separar responsa
 Este sigue el siguiente flujo: 
 Request -> Route -> Controller -> Service -> Response
 
+```bash
 /backend
 │ 
 ├──data
@@ -38,6 +39,7 @@ Request -> Route -> Controller -> Service -> Response
 ├── package.json 
 ├── package-lock.json
 └── tsconfig.json
+```
 
 ## Descripción de carpetas
 
