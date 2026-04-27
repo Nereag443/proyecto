@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Select } from "../components/select";
 import { MediaCard } from "../components/mediaCard";
 import { Rating } from "../components/rating";
-import { createMedia, getMedia } from "../api/client";
+import { createMedia, getMedia, updateMedia, deleteMedia } from "../api/client";
 import { useEffect } from "react";
 import type { Media } from "../types/media";
 
@@ -19,31 +19,22 @@ export function MySpace () {
     const [errors, setErrors] = useState({title: "", type: ""});
     const [loading, setLoading] = useState(false);
     const handleDelete = async (id?: number) => {
-        const response = await fetch(`http://localhost:3001/api/v1/media/${id}`, {
-            method: 'DELETE'
-        });
-        if (!response.ok) {
-            console.error("Failed to delete media with id:", id);
-            return;
+        try {
+            await deleteMedia(id!);
+            setMedia(prev => prev.filter(item => item.id !== id));
+        } catch (error) {
+            console.error("Error al eliminar medio:", error);
         }
-        setMedia(prev => prev.filter(item => item.id !== id));
     }
 
 
     const handleEdit = async (updatedMedia: Media) => {
-        const response = await fetch(`http://localhost:3001/api/v1/media/${updatedMedia.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-        },
-            body: JSON.stringify(updatedMedia)
-        });
-        if (!response.ok) {
-            throw new Error('Failed to update media');
+        try {
+            const updated = await updateMedia(updatedMedia.id!, updatedMedia);
+            setMedia(prev => prev.map(item => item.id === updated.id ? updated : item));
+        } catch (error) {
+            console.error("Error al actualizar medio:", error);
         }
-
-        const savedMedia = await response.json();
-        setMedia(prev => prev.map(item => item.id === savedMedia.id ? savedMedia : item));
     }
 
     useEffect(() => {
