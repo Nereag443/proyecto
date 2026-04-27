@@ -32,9 +32,16 @@ Antes de ejecutar el proyecto se necesita:
 Clonar el repositorio:
 
 ```bash
-git clone <https://github.com/Nereag443/proyecto.git>
+git clone https://github.com/Nereag443/proyecto.git
 cd diary-project
 ```
+
+### Backend
+Ver instrucciones en: ./backend/README.md
+
+### Frontend
+Ver instrucciones en ./frontend/README.md
+
 
 ## Cómo usar el proyecto
 Una vez iniciado el proyecto:
@@ -42,7 +49,7 @@ Una vez iniciado el proyecto:
  2. Regístrate o inicia sesión 
  3. Añade nuevos medios
  4. Asigna una puntuación y escribe una reseña
- 5. Consulta tus estadíticas en la página de estadíticas 
+ 5. Consulta tus estadíticas en la página de estadísticas 
 
 ## Ejemplos de uso
 
@@ -54,7 +61,7 @@ Una vez iniciado el proyecto:
 ## Funcionalidades principales
 
 ### Gestión de medios 
- - Creac, editar y eliminar registros de medios
+ - Crear, editar y eliminar registros de medios
  - Clasificación por tipo (película, serie, libro, etc.)
 
 ### Sistema de valoración
@@ -64,7 +71,6 @@ Una vez iniciado el proyecto:
 ### Análisis de datos
 
  - Visualización de gráficos de consumo
- -
 
 ## Experiencia de usuario
  - Interfaz intuitiva y responsive
