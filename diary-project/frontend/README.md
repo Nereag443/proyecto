@@ -12,7 +12,7 @@ Aplicación cliente del proyecto desarrollada en React. Permite gestionar usuari
 |    ├── components
 |    |    ├── button.tsx
 │    │    ├── input.tsx
-│    │    ├── mediaCards.tsx
+│    │    ├── mediaCard.tsx
 │    │    ├── modal.tsx
 │    │    ├── navbar.tsx
 │    │    ├── rating.tsx
@@ -22,7 +22,7 @@ Aplicación cliente del proyecto desarrollada en React. Permite gestionar usuari
 │    ├── context/
 │    │   └── authContext.tsx
 │    │   └── themeContext.tsx
-│    │   └── theProvider.tsx
+│    │   └── themeProvider.tsx
 │    │ 
 │    ├── hooks/
 │    │    └── useAuth.tsx
@@ -66,11 +66,25 @@ npm run dev
 ```
 
 ## Conexión con el backend
+El frontend se conecta con el backend a través de la capa `api/client.ts`, que centraliza todas las llamadas HTTP. La base URL está definida como: 
+
+```ts
+const API_URL = 'http://localhost:3001/api/v1';
+```
 
 ## API
-Este frontend consume el backend en:
+Los endpoints utilizados son: 
+ - `GET /media` — obtener todos los medios
+ - `POST /media` — crear un nuevo medio
+ - `PUT /media/:id` — editar un medio
+ - `DELETE /media/:id` — eliminar un medio
+ - `POST /users/register` — registrar un usuario
+ - `POST /users/login` — iniciar sesión
 
 
 ## Documentación detallada
 
 La documentación completa de componentes, hooks, rutas y demás se puede encontrar en la capeta [`/docs`](/docs/).
+
+## Notas
+Asegurarse de que el backend está corriendo antes de iniciar el frontend.
