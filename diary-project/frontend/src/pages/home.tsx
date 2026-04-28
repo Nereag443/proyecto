@@ -4,7 +4,7 @@ import { Modal } from "../components/modal";
 import { useState } from "react";
 import { registerUser, loginUser } from "../api/client";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../hooks/useAuth";
 
 export function Home () {
     const [isLoginOpen, setIsLoginOpen] = useState(false);

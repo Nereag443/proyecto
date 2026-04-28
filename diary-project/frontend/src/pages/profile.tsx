@@ -3,7 +3,7 @@ import { Input } from "../components/input";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Modal } from "../components/modal";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../hooks/useAuth";
 
 export function Profile () {
     const navigate = useNavigate();
