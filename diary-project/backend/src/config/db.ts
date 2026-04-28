@@ -7,7 +7,7 @@ if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
-const dbpath = path.join(__dirname, 'database.db');
+const dbpath = path.join(dataDir, 'database.db');
 
 export const db = new Database(dbpath);
 
@@ -28,7 +28,6 @@ db.exec(`
     rating INTEGER DEFAULT 0,
     review TEXT,
     date_added DATE DEFAULT CURRENT_DATE,
-    user_id INTEGER,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    user_id INTEGER
   )
 `);
