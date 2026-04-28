@@ -48,11 +48,14 @@ export function MediaCard({ id, title, type, date_added, review, rating, onEdit,
                 {Array.from({ length: 5 }, (_, index) => 
                     (<i key={index} className={index < rating ? "fas fa-star text-yellow-400" : "far fa-star text-gray-400"} />))}
                 </div>
-                <p className="text-sm  text-gray-500 dark:text-gray-400 break-words">{review}</p>
+                <p className="text-sm  text-gray-500 dark:text-gray-400 break-words">{review || "Sin reseña"}</p>
             </div>
-            <div className="flex flex-row md:flex-col gap-2 mt-4">
+            <div className="flex flex-row md:flex-col gap-2 justify-center items-center">
                 <Button 
-                    text="Editar"
+                    text={
+                        <i className="fa-regular fa-pen-to-square text-lg"></i>
+                    }
+                    className="p-2 rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
                     onClick={() => {
                         setEditTitle(title);
                         setEditType(type);
@@ -61,7 +64,10 @@ export function MediaCard({ id, title, type, date_added, review, rating, onEdit,
                         setIsEditModalOpen(true)}} />
 
                 <Button 
-                    text="Eliminar"
+                    text={
+                        <i className="fa-regular fa-trash-can text-lg text-red-400"></i>
+                    }
+                    className="p-2 rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
                     onClick={() => setShowDelete(true)} />
             </div>
                 <Modal 
@@ -78,7 +84,6 @@ export function MediaCard({ id, title, type, date_added, review, rating, onEdit,
                             options={["Libro", "Película", "Serie", "Videojuego", "Música"]}
                             onChange={(value) => setEditType(value)}
                             error={errors.type} />
-                        <Button text="Añadir categoría" onClick={() => {}} />
                         <Input
                             value={editReview || ""}
                             placeholder="Introduce una reseña"

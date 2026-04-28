@@ -8,6 +8,8 @@ import { Rating } from "../components/rating";
 import { createMedia, getMedia, updateMedia, deleteMedia } from "../api/client";
 import { useEffect } from "react";
 import type { Media } from "../types/media";
+import { useFilter } from "../hooks/useFilter";
+import { Filter } from "../components/Filter";
 
 export function MySpace () {
     const [media, setMedia] = useState<Media[]>([]);
@@ -19,6 +21,7 @@ export function MySpace () {
     const [errors, setErrors] = useState({title: "", type: ""});
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+    const { filteredMedia, selectedType, setSelectedType } = useFilter(media);
     const handleDelete = async (id?: number) => {
         try {
             await deleteMedia(id!);
@@ -85,9 +88,18 @@ export function MySpace () {
             <div className="container mx-auto p-4">
                 <h1 className="text-3xl font-bold mb-4">Bienvenido a tu espacio</h1>
                 <p className="text-lg mb-4">Aqui puedes añadir y ver tus medios consumidos</p>
+                <div className="flex justify-between items-center mt-4">
                 <Button 
-                    text="Añadir"
+                    text={
+                        <i className="fa-solid fa-plus"></i>
+                    }
+                    className="rounded-full cursor-pointer border bg-gray-600 text-white px-4 py-2 hover:bg-gray-700 transition-colors duration-300"
                     onClick={() => setIsModalOpen(true)} />
+                <Filter 
+                    options={["Libro", "Película", "Serie", "Videojuego", "Música"]} 
+                    selected={selectedType} 
+                    onChange={setSelectedType} />
+                </div>
                 <div className="flex flex-col gap-4 mt-4">
                     {loading && <p>Cargando...</p>} 
                     {error && (
@@ -96,7 +108,7 @@ export function MySpace () {
                             <Button text="Reintentar" onClick={fetchMedia} />
                         </div>
                     )}
-                    {!loading && !error && media.map((item) => (
+                    {!loading && !error && filteredMedia.map((item) => (
                         <MediaCard key={item.id} {...item}
                         onDelete={() => handleDelete(item.id)}
                         onEdit={handleEdit} />
@@ -116,7 +128,6 @@ export function MySpace () {
                             options={["Libro", "Película", "Serie", "Videojuego", "Música"]}
                             onChange={(value) => setType(value)}
                             error={errors.type} />
-                        <Button text="Añadir categoría" onClick={() => {}} />
                         <Input
                             value={review}
                             placeholder="Introduce una reseña"
