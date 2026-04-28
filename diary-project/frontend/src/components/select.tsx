@@ -14,6 +14,7 @@ export function Select(props: SelectProps) {
             value={props.value} 
             onChange={(e) => props.onChange(e.target.value)} 
             className={`
+             dark:bg-gray-900
             cursor-pointer
             w-full
             bg-transparent
@@ -25,13 +26,13 @@ export function Select(props: SelectProps) {
             text-black
             dark:text-white ${props.className || ""}`}>
 
-            <option value="" disabled hidden>Elige una opción</option>
+            <option value="" disabled hidden>Elige el tipo</option>
 
             {props.options.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
             ))}
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-white">
             <svg 
                 className="fill-current h-4 w-4" 
                 xmlns="http://www.w3.org/2000/svg" 
