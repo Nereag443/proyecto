@@ -16,7 +16,6 @@ Es un proyecto de una aplicación que permite a los usuarios registrar medios (p
  - Node.js
  - Express
  - SQLite
- - Typescript (tsx)
  - Nodemon
  - CORS
  - bcrypt
@@ -49,7 +48,7 @@ Una vez iniciado el proyecto:
  2. Regístrate o inicia sesión 
  3. Añade nuevos medios
  4. Asigna una puntuación y escribe una reseña
- 5. Consulta tus estadíticas en la página de estadísticas 
+ 5. Consulta tus estadísticas en la página de estadísticas 
 
 ## Ejemplos de uso
 

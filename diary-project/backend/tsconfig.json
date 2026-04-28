@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "ignoreDeprecations": "5.0",
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "files": [
+    "src/index.ts",
+    "./src/config/db.ts",
+    "./src/config/env.ts",
+    "./src/controllers/media.controller.ts",
+    "./src/controllers/users.controller.ts",
+    "./src/routes/media.routes.ts",
+    "./src/routes/users.routes.ts",
+    "./src/services/media.service.ts",
+    "./src/services/users.service.ts"
+  ],
+    "exclude": [
+        "dist"
+    ]
+}

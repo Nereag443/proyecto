@@ -55,6 +55,16 @@ Aplicación cliente del proyecto desarrollada en React. Permite gestionar usuari
 
 ## Instalación
 
+ 1. Instalar dependencias:
+```bash
+cd diary-project/frontend
+npm install
+```
+ 2. Ejecutar el servidor
+```bash
+npm run dev
+```
+
 ## Conexión con el backend
 
 ## API
@@ -64,6 +74,3 @@ Este frontend consume el backend en:
 ## Documentación detallada
 
 La documentación completa de componentes, hooks, rutas y demás se puede encontrar en la capeta [`/docs`](/docs/).
-
-## Notas
-
