@@ -21,10 +21,10 @@ export function Navbar () {
                         <i className="fa-solid fa-bars"></i>
                     </Button>
             <div className="md:flex hidden p-4 divide-x divide-gray-600">
-                <Link to="/" className='px-4'>Inicio</Link>
+                {/*<Link to="/" className='px-4'>Inicio</Link>*/}
                 <Link to="/mySpace" className='px-4'>Mi espacio</Link>
                 <Link to="/stats" className='px-4'>Estadísticas</Link>
-                <Link to="/profile" className='px-4'>Perfil</Link>
+                {/*<Link to="/profile" className='px-4'>Perfil</Link>*/}
             </div>
             <Button 
                 onClick={toggleTheme}
@@ -33,10 +33,10 @@ export function Navbar () {
             </div>
             {open && (
                 <div className="md:hidden flex flex-col mt-4">
-                    <Link to="/" className='px-4 py-2'>Inicio</Link>
+                    {/*<Link to="/" className='px-4 py-2'>Inicio</Link>*/}
                     <Link to="/mySpace" className='px-4 py-2'>Mi espacio</Link>
                     <Link to="/stats" className='px-4 py-2'>Estadísticas</Link>
-                    <Link to="/profile" className='px-4 py-2'>Perfil</Link>
+                    {/*<Link to="/profile" className='px-4 py-2'>Perfil</Link>*/}
                 </div>
             )}
         </nav>
