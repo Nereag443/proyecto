@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 
 export const getMedia = async(req: Request, res: Response, next: NextFunction) => {
     try {
-        const media = await mediaService.getAllMedia();
+        const media = mediaService.getAllMedia();
         res.json(media);
     } catch (error) {
         next(error);
@@ -19,7 +19,7 @@ export const  createMedia = async(req: Request, res: Response, next: NextFunctio
         if (!type || type.trim() === '') {
             return res.status(400).json({ error: 'Type is required' });
         }
-        const media = await mediaService.createMedia({ title, type, rating, review, user_id });
+        const media = mediaService.createMedia({ title, type, rating, review, user_id });
         res.status(201).json(media);
     } catch (error) {
         next(error);
@@ -30,7 +30,7 @@ export const updateMedia = async (req: Request, res: Response, next: NextFunctio
     try {
         const id = Number(req.params.id);
         const { title, type, rating, review } = req.body;
-        const media = await mediaService.updateMedia(id, { title, type, rating, review });
+        const media = mediaService.updateMedia(id, { title, type, rating, review });
         res.json(media);
     } catch (error) {
         next(error);
@@ -40,7 +40,7 @@ export const updateMedia = async (req: Request, res: Response, next: NextFunctio
 export const deleteMedia = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = Number(req.params.id);
-        await mediaService.deleteMedia(id);
+        mediaService.deleteMedia(id);
         res.status(204).send();
     } catch (error) {
         next(error);

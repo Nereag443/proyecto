@@ -1,16 +1,11 @@
-import sqlite3 from 'sqlite3';
+import Database from 'better-sqlite3';
+import path from 'path';
 
-const sqlite = sqlite3.verbose();
+const dbpath = path.join(__dirname, '../data/database.db');
 
-export const db = new sqlite.Database('./data/database.db', (err) => {
-  if (err) {
-    console.error(err.message);
-  } else {
-    console.log('Connected to the database.');
-  }
-});
+export const db = new Database(dbpath);
 
-db.run(`
+db.exec(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
@@ -19,7 +14,7 @@ db.run(`
   )
 `);
 
-db.run(`
+db.exec(`
   CREATE TABLE IF NOT EXISTS media (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,

@@ -10,70 +10,33 @@ export interface Media {
     user_id: number;
 }
 
-export const getAllMedia = (): Promise<Media[]> => {
-    return new Promise((resolve, reject) => {
-        db.all('SELECT * FROM media', [], (err, rows: Media[]) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(rows);
-            }
-        });
-    });
+export const getAllMedia = (): Media[] => {
+    return db.prepare('SELECT * FROM media').all() as Media[];
 }
 
-export const createMedia = (media: Omit<Media, 'id' | 'date_added'>): Promise<Media> => {
-    return new Promise((resolve, reject) => {
-        const date = new Date().toISOString();
-        db.run(
-            `INSERT INTO media (title, type, rating, review, user_id, date_added) VALUES (?, ? ,?, ?, ?, ?)`,
-        [media.title, media.type, media.rating, media.review, media.user_id, date],
-        function (err) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve({
-                    id: this.lastID,
-                    ...media, date_added: date
-                });
-            }
-        });
-    });
+export const createMedia = (media: Omit<Media, 'id' | 'date_added'>): Media => {
+    const date = new Date().toISOString();
+    const stmt = db.prepare(
+        `INSERT INTO media (title, type, rating, review, user_id, date_added) VALUES (?, ?, ?, ?, ?, ?)`
+    );
+    const result = stmt.run(media.title, media.type, media.rating, media.review, media.user_id, date);
+    return {
+        id: result.lastInsertRowid as number,
+        ...media,
+        date_added: date
+    };
 };
 
-export const updateMedia = (id: number, media: Partial<Media>): Promise<Media> => {
-    return new Promise((resolve, reject) => {
-        db.run(
-            `UPDATE media SET title = ?, type = ?, rating = ?, review = ? WHERE id = ?`,
-            [media.title, media.type, media.rating, media.review, id],
-            function (err) {
-                if (err) {
-                    reject(err);
-                } else if (this.changes === 0) {
-                    reject(new Error('Media not found'));
-                } else {
-                    db.get('SELECT * FROM media WHERE id = ?', [id], (err, row: Media) => {
-                    if (err) {
-                        reject(err);
-                    }else {
-                    resolve(row);
-                    }
-                    });
-                }
-            });
-    });
-}
+export const updateMedia = (id: number, media: Partial<Media>): Media => {
+    const stmt = db.prepare(
+        `UPDATE media SET title = ?, type = ?, rating = ?, review = ? WHERE id = ?`
+    );
+    const result = stmt.run(media.title, media.type, media.rating, media.review, id);
+    if (result.changes === 0) throw new Error('Media not found');
+    return db.prepare('SELECT * FROM media WHERE id = ?').get(id) as Media;
+};
 
-export const deleteMedia = (id: number): Promise<void> => {
-    return new Promise((resolve, reject ) => {
-        db.run('DELETE FROM media WHERE id = ?', [id], function (err) {
-            if (err) {
-                reject (err);
-            }else if (this.changes === 0) {
-                reject(new Error('Media not found'));
-            }else {
-                resolve();
-            }
-        });
-    });
+export const deleteMedia = (id: number): void => {
+    const result = db.prepare('DELETE FROM media WHERE id = ?').run(id);
+    if (result.changes === 0) throw new Error('Media not found');
 };
