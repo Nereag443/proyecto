@@ -1,10 +1,10 @@
-## Arquitectura de la aplicación
+# Arquitectura de la aplicación
 
-### Diseño de wireframe
+## Diseño de wireframe
 
  - https://excalidraw.com/#json=yQLVL0Cx32IGr9RII-B-6,rVoG0SFn34JSFIvIoeefFQ
 
-### Componentes principales
+## Componentes principales
 
  - Auth (login / registro)
  - Dashboard
@@ -14,7 +14,7 @@
 
 ---
 
-### Componentes reautilizables
+## Componentes reautilizables
 
 - Botones
 - Inputs
@@ -28,7 +28,7 @@
 
 ---
 
-### Gestión del estado de la aplicación
+## Gestión del estado de la aplicación
 
  - Estado local (useState):
  - Estado compartido (Context API)
@@ -36,11 +36,11 @@
 
 ---
 
-### Diseño de backend
+## Diseño de backend
 
 Base URL: /api/v1
 
-#### Base de datos
+### Base de datos
 
 La base de datos constará de dos tablas:
 
@@ -60,13 +60,13 @@ media:
  - date_added
  - user_id
 
-#### Rescursos REST: 
+### Rescursos REST: 
 
  - /api/v1/media
  - /api/v1/users
  - /api/v1/auth
 
-#### Verbos HTTP y contratos:
+### Verbos HTTP y contratos:
 
 Usuario:
  - POST /api/v1/auth/register
@@ -171,21 +171,21 @@ Respuesta:
 
 
 
-### Datos persistidos
-#### En el servidor
+## Datos persistidos
+### En el servidor
 
 Se guardaran los datos de:
  - Usuarios
  - Registros de medios
  - Autentificación
 
-#### En el cliente
+### En el cliente
 
  - Estados de ui (modales, temas, avatares)
 
  ---
 
-### Diagrama de flujo de datos
+## Diagrama de flujo de datos
 
 Frontend  
   &darr;
