@@ -43,7 +43,7 @@ Request -> Route -> Controller -> Service -> Response
 
 ## Descripción de carpetas
 
-**data**
+**data**  
 Contiene la base de datos SQLite
 
 **config**  
