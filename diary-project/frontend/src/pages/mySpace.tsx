@@ -83,7 +83,6 @@ export function MySpace () {
     }
 
     return (
-
         <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white p-4">
             <div className="container mx-auto p-4">
                 <h1 className="text-3xl font-bold mb-4">Bienvenido a tu espacio</h1>
@@ -106,6 +105,12 @@ export function MySpace () {
                         <div className="flex flex-col items-center gap-2 text-red-500">
                             <p>{error}</p>
                             <Button text="Reintentar" onClick={fetchMedia} />
+                        </div>
+                    )}
+                    {!loading && !error && media.length === 0 && (
+                        <div className="flex flex-col items-center gap-4 mt-8 text-gray-500">
+                            <i className="fa-regular fa-folder-open" />
+                            <p>No tienes medios añadidos, de momento!</p>
                         </div>
                     )}
                     {!loading && !error && filteredMedia.map((item) => (
