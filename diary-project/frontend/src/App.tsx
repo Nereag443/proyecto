@@ -3,6 +3,7 @@ import { MySpace } from './pages/mySpace'
 import { Stats } from './pages/stats'
 import { Navbar } from './components/navbar'
 import NotFound from './pages/notFound'
+import { Navigate } from 'react-router-dom'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
 
      <Routes>
       {/* <Route path="/" element={<Home />} /> */}
+      <Route path="/" element={<Navigate to="/mySpace" replace />} />  
       <Route path="/mySpace" element={<MySpace />} />
       <Route path="/stats" element={<Stats />} />
       {/* <Route path="/profile" element={<Profile />} />*/}
