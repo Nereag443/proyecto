@@ -1,4 +1,4 @@
-const API_URL = 'https://diary-project-5g4b.onrender.com';
+const API_URL = 'https://diary-project-5g4b.onrender.com/api/v1';
 import type { Media } from "../types/media";
 
 export const getMedia = async (): Promise<Media[]> => {
