@@ -3,6 +3,8 @@ import { Bar } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import { Spinner } from '../components/spinner';
 import type { Media } from '../types/media';
+import { getMedia } from '../api/client';
+import { useMemo } from 'react';
 
 ChartJS.register(
     CategoryScale,
@@ -70,11 +72,16 @@ const options = {
 export function Stats () {
     const [data, setData] = useState<GroupedStats[]>([]);
     const [loading, setLoading] = useState(true);
+    const [media, setMedia] = useState<Media[]>([]);
+    const total = useMemo(() => media.length, [media]);
+    const avgRating = useMemo(() => media.length ? media.reduce((acc, m) => acc + m.rating, 0) / media.length : 0, [media]);
 useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:3001/api/v1/media')
-        .then(response => response.json())
-        .then(data => setData(groupByType(data)))
+    getMedia()
+        .then(data => {
+            setMedia(data), 
+            setData(groupByType(data));
+        })
         .catch(error => console.error('Error fetching stats:', error))
         .finally(() => setLoading(false));
 }, []);
@@ -94,15 +101,20 @@ if (data.length === 0) {
     );
 }
     return (
-        <div className="min-h-screen bg-white text-black dark:bg-gray-900 dark:text-white p-4">
-            <div className="container mx-auto p-4">
-                <h1 className="text-3xl font-bold mb-4">Estadísticas</h1>
-                <p className="text-lg mb-4">Aquí puedes ver tus estadísticas de consumo de medios</p>
-                <div className="mb-4 w-full h-100 md:h-150 lg:h-125">
-                    <Bar data={barChart(data)} options={options} />
-                </div>
+        <div className='flex flex-col md:flex-row gap-8'>
+            <div className='w-full md:w-2/3 h-100'>
+                <Bar data={barChart(data)} options={options} />
             </div>
-        
+            <div className='flex flex-col gap-4 w-full md:w-1/3'>
+            <div className='bg-gray-100 dark:bg-gray-800 rounded p-4 text-center'>
+                <p className='text-2xl font-bold'>{total}</p>
+                <p className='text-sm text-gray-500'>Total medios</p>
+            </div>
+            <div className='bg-gray-100 dark:bg-gray-800 rounded p-4 text-center'>
+                <p className='text-2xl font-bold'>{avgRating.toFixed(1)}</p>
+                <p className='text-sm text-gray-500'>Media de valoración</p>
+            </div>
+            </div>
         </div>
     )
 }
