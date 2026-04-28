@@ -1,10 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Home } from './pages/home'
 import { MySpace } from './pages/mySpace'
 import { Stats } from './pages/stats'
 import { Navbar } from './components/navbar'
 import NotFound from './pages/notFound'
-import { Profile } from './pages/profile'
 
 function App() {
   return (

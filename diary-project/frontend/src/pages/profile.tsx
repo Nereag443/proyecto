@@ -9,12 +9,6 @@ export function Profile () {
     const navigate = useNavigate();
     const [showLogout, setShowLogout] = useState(false);
     const { user, logout } = useAuth();
-    const [editUsername, setEditUsername] = useState(user?.username || "");
-    const [editEmail, setEditEmail] = useState(user?.email || "");
-
-    const handleEdit = async () => {
-        
-    }
 
     const handleLogout = () => {
         logout();
