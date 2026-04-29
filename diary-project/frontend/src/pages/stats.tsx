@@ -107,21 +107,21 @@ if (data.length === 0) {
         <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4 mt-4">Estadísticas</h1>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-gray-100 mt-4 dark:bg-gray-800 rounded-xl p-4 text-center shadow">
+            <div className="bg-gray-100 mt-4 dark:bg-gray-800 rounded-xl p-4 text-center shadow hover:scale-105 transition-transform duration-200">
                 <p className="text-sm text-gray-500 mb-1">Total medios</p>
                 <p className="text-3xl font-bold">{total}</p>
             </div>
-            <div className="bg-gray-100 mt-4 dark:bg-gray-800 rounded-xl p-4 text-center shadow">
+            <div className="bg-gray-100 mt-4 dark:bg-gray-800 rounded-xl p-4 text-center shadow hover:scale-105 transition-transform duration-200">
                 <p className="text-sm text-gray-500 mb-1">Media de valoración</p>
                 <p className="text-3xl font-bold">{avgRating.toFixed(1)}
                     <i className="fa-solid fa-star text-yellow-500 ml-1"></i>
                 </p>
             </div>
-            <div className="bg-gray-100 mt-4 dark:bg-gray-800 rounded-xl p-4 text-center shadow">
+            <div className="bg-gray-100 mt-4 dark:bg-gray-800 rounded-xl p-4 text-center shadow hover:scale-105 transition-transform duration-200">
                 <p className="text-sm text-gray-500 mb-1">Más consumido</p>
                 <p className="text-3xl font-bold">{mostConsumedType || "-"}</p>
             </div>
-            <div className="bg-gray-100 mt-4 dark:bg-gray-800 rounded-xl p-4 text-center shadow">
+            <div className="bg-gray-100 mt-4 dark:bg-gray-800 rounded-xl p-4 text-center shadow hover:scale-105 transition-transform duration-200">
                 <p className="text-sm text-gray-500 mb-1">Mejor valorado</p>
                 <p className="text-lg font-bold truncate">{bestMedia?.title || "-"}</p>
             </div>

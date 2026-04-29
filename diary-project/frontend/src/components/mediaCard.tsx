@@ -37,7 +37,7 @@ export function MediaCard({ id, title, type, date_added, review, rating, onEdit,
     }
 
     return (
-        <div className="bg-white text-black dark:bg-gray-800 dark:text-white rounded shadow-md p-4 w-full flex flex-col md:flex-row gap-4">
+        <div className="animate-fade-in bg-white text-black dark:bg-gray-800 dark:text-white rounded shadow-md p-4 w-full flex flex-col md:flex-row gap-4">
             <div className="flex flex-col min-w-32">
                 <h3 className="text-xl font-bold mb-2 overflow-hidden break-words">{title}</h3>
                 <p className="text-sm text-gray-700 mb-4 rounded-full w-fit p-2 bg-gray-400 dark:text-white">{type}</p>
