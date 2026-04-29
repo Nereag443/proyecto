@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import type { Media } from "../types/media";
 import { useFilter } from "../hooks/useFilter";
 import { Filter } from "../components/Filter";
+import { useLoading } from "../hooks/useLoading";
 
 export function MySpace () {
     const [media, setMedia] = useState<Media[]>([]);
@@ -20,7 +21,7 @@ export function MySpace () {
     const [rating, setRating] = useState(0);
     const [errors, setErrors] = useState({title: "", type: ""});
     const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
+    const { loading, setLoading } = useLoading();
     const { filteredMedia, selectedType, setSelectedType } = useFilter(media);
     const handleDelete = async (id?: number) => {
         try {
