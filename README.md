@@ -5,21 +5,25 @@ Es un proyecto de una aplicación que permite a los usuarios registrar medios (p
 
 ### Frontend:
 
- - React
- - Vite
+ - React + TypeScript
  - TailwindCSS
- - Chart.js
+ - Chart.js / react-chartjs-2
  - React Router
+ - Font Awesome
 
 ### Backend
 
  - Node.js
  - Express
- - SQLite
+ - better-sqlite3
  - Nodemon
  - CORS
  - bcrypt
  - jsonwebtoken
+
+### Despliegue
+ - Vercel
+ - Render
 
 ## Requisitos previos
 Antes de ejecutar el proyecto se necesita:
