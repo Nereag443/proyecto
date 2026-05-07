@@ -22,8 +22,9 @@ Es un proyecto de una aplicación que permite a los usuarios registrar medios (p
  - jsonwebtoken
 
 ### Despliegue
- - Vercel
- - Render
+ - Frontend en Vercel
+ - Backend en Render
+ - Monitoreo y keep-alive mediante UptimeRobot
 
 ## Requisitos previos
 Antes de ejecutar el proyecto se necesita:

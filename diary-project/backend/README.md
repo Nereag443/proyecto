@@ -237,3 +237,6 @@ app.use ((err: any, req: express.Request, res: express.Response, next: express.N
     res.status(500).json({ error: 'Internal Server Error' });
 });
 ```
+
+## Notas
+Al estar desplegado con el plan gratuito de Render, el servidor entra en suspensión tras 15 minutos, por lo que se usa UptimeRobot para mantener el servidor activo, evitando cargas largas al entrar por primera vez en la app.
